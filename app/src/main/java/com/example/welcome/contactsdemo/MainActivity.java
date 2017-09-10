@@ -83,8 +83,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //               PostContatcsData();
+                /* start from Last to first */
                 for (int i = contactModelArrayList.size(); i >0  ; i= i-5) {
+                    /* if x is total contacts , only x-5 contacts will be uploaded. */
                     if ( (contactModelArrayList.size() - i)+5  < contactModelArrayList.size() ) {
+                        /* 1 st loop  sublist(230 - 230 ,5)
+                         * 2 nd loop sublist(5, 10)
+                          * 3 rd loop sublist(10,15) ... so on upto end of loop */
                         new ParseJSONTask(contactModelArrayList.subList(contactModelArrayList.size() - i
                                 ,(contactModelArrayList.size() - i)+5)).execute();
                         Log.d("MainActivity", "called 5 "+(contactModelArrayList.size() - i)+" and"+(contactModelArrayList.size() - i)+5);
@@ -177,10 +182,11 @@ public class MainActivity extends AppCompatActivity {
             String contactsList = "";
             if (mFiveContactList.size()>= 5 ) {
                 for (int i = 0; i < 5; i++) {
+                    /* first time comma is not added to string */
                         if(i  == 0)
                             contactsList= mFiveContactList.get(i);
                             else
-                    contactsList+= ","+contactsList+","+mFiveContactList.get(i);
+                    contactsList+= ","+contactsList+","+mFiveContactList.get(i); // here , comma will be added every iteration.
                 }
             }
             String api = "http://52.66.43.145/rama/app/get_numbers.php?contact_list=" +
